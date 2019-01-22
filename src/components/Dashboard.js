@@ -4,7 +4,7 @@ import AddNewExpense from './AddNewExpense';
 class Dashboard extends React.Component {
     render() {
         return (
-            <div className="ui row">
+            <div className="ui row text container">
                 <AddNewExpense />
             </div>
         )

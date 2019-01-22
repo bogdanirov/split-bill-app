@@ -30,7 +30,7 @@ class AddNewExpense extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <label>Amount</label>
-                    <Input icon="currency" iconPosition="left" type="number" />
+                    <Input icon="currency" iconPosition="left" type="number" step=".01" />
                 </Form.Field>
                 <Form.Field>
                     <label>Category</label>
