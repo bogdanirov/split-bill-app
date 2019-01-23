@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dashboard from './components/Dashboard';
+import Router from './components/Router';
 
 class App extends Component {
   state = {
@@ -13,9 +13,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="ui container">
-        <h1 className="ui header">Split Bill App</h1>
-        <Dashboard addExpense={this.addExpense} />
+      <div className="ui container page-wrap">
+        <h1 className="ui center aligned header page-logo">Split Bill App</h1>
+        <Router/>
       </div>
     );
   }
