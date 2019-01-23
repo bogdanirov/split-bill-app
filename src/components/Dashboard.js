@@ -5,7 +5,7 @@ class Dashboard extends React.Component {
     render() {
         return (
             <div className="ui row">
-                <AddNewExpense />
+                <AddNewExpense addExpense={this.props.addExpense} />
             </div>
         )
     }

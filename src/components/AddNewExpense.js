@@ -7,8 +7,16 @@ class AddNewExpense extends React.Component {
         console.log(value);
     }
 
-    handleExpenseSubmit = e => {
+    createExpense = e => {
         e.preventDefault();
+        const expense = {
+            userId: '',
+            amount: '',
+            category: '',
+            timestamp: new Date()
+        }
+        this.props.addExpense(expense);
+        e.currentTarget.reset();
     }
 
     render() {
@@ -24,17 +32,17 @@ class AddNewExpense extends React.Component {
         ];
 
         return (
-            <Form onSubmit={this.handleExpenseSubmit}>
+            <Form onSubmit={this.createExpense}>
                 <Form.Field>
-                    <Dropdown placeholder='Select your split buddy' fluid selection search options={splitBuddies} />
+                    <Dropdown placeholder='Select your split buddy' fluid selection search options={splitBuddies} onChange={e => console.log(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>Amount</label>
-                    <Input icon="currency" iconPosition="left" type="number" />
+                    <Input icon="currency" iconPosition="left" type="number" step=".01" onChange={e => console.log(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>Category</label>
-                    <Dropdown placeholder='Select expense category or add a new one' fluid selection options={expensesCategories} allowAdditions search onAddItem={this.handleAddition} />
+                    <Dropdown placeholder='Select expense category or add a new one' fluid selection options={expensesCategories} allowAdditions search onAddItem={this.handleAddition}  onChange={e => console.log(e.target.value)} />
                 </Form.Field>
             
                 <Button type='submit'>Save Expense</Button>
