@@ -1,182 +1,182 @@
 const expensesCategories = [
   {
-    'key':'groceries',
-    'text': 'Groceries'
+    text:'Groceries',
+    value: 'Groceries'
   },
   {
-    'key':'rent',
-    'text': 'Rent'
+    text:'Rent',
+    value: 'Rent'
   },
   {
-    'key':'electricity',
-    'text': 'Electricity'
+    text:'Electricity',
+    value: 'Electricity'
   },  
   {
-    'key':'internet',
-    'text': 'Internet'
+    text:'Internet',
+    value: 'Internet'
   },  
   {
-    'key':'water',
-    'text': 'Water'
+    text:'Water',
+    value: 'Water'
   },  
   {
-    'key':'heating',
-    'text': 'Heating'
+    text:'Heating',
+    value: 'Heating'
   }, 
   {
-    'key':'medical',
-    'text': 'Medical'
+    text:'Medical',
+    value: 'Medical'
   }, 
   {
-    'key':'takeout',
-    'text': 'Takeout'
+    text:'Takeout',
+    value: 'Takeout'
   }, 
   {
-    'key':'dinningOut',
-    'text': 'Dinning Out'
+    text:'DinningOut',
+    value: 'Dinning Out'
   }, 
   {
-    'key':'coffee',
-    'text': 'Coffee'
+    text:'Coffee',
+    value: 'Coffee'
   }, 
   {
-    'key':'drinks',
-    'text': 'Drinks'
+    text:'Drinks',
+    value: 'Drinks'
   }, 
   {
-    'key':'gas',
-    'text': 'Gas'
+    text:'Gas',
+    value: 'Gas'
   }, 
   {
-    'key':'taxi',
-    'text': 'Taxi'
+    text:'Taxi',
+    value: 'Taxi'
   }, 
   {
-    'key':'carService',
-    'text': 'Car Service'
+    text:'CarService',
+    value: 'Car Service'
   }, 
   {
-    'key':'carCleaning',
-    'text': 'Car Cleaning'
+    text:'CarCleaning',
+    value: 'Car Cleaning'
   }, 
   {
-    'key':'carInsurance',
-    'text': 'Car Insurance'
+    text:'CarInsurance',
+    value: 'Car Insurance'
   }, 
   {
-    'key':'movies',
-    'text': 'Movies'
+    text:'Movies',
+    value: 'Movies'
   }, 
   {
-    'key':'sports',
-    'text': 'Sports'
+    text:'Sports',
+    value: 'Sports'
   }, 
   {
-    'key':'events',
-    'text': 'Events'
+    text:'Events',
+    value: 'Events'
   }, 
   {
-    'key':'gifts',
-    'text': 'Gifts'
+    text:'Gifts',
+    value: 'Gifts'
   }, 
   {
-    'key':'charity',
-    'text': 'Charity'
+    text:'Charity',
+    value: 'Charity'
   }, 
   {
-    'key':'lodging',
-    'text': 'Lodging'
+    text:'Lodging',
+    value: 'Lodging'
   }, 
 ];
 
 // Obj
 // category1: {
-//   'key': 'groceries',
-//   'text': 'Groceries'
+//   'text': 'groceries',
+//   'value': 'Groceries'
 // },
 // category2: {
-//   'key':'rent',
-//   'text': 'Rent'
+//   'text':'rent',
+//   'value': 'Rent'
 // },
 // category3: {
-//   'key':'electricity',
-//   'text': 'Electricity'
+//   'text':'electricity',
+//   'value': 'Electricity'
 // },  
 // category4: {
-//   'key':'internet',
-//   'text': 'Internet'
+//   'text':'internet',
+//   'value': 'Internet'
 // },  
 // category5: {
-//   'key':'water',
-//   'text': 'Water'
+//   'text':'water',
+//   'value': 'Water'
 // },  
 // category6: {
-//   'key':'heating',
-//   'text': 'Heating'
+//   'text':'heating',
+//   'value': 'Heating'
 // }, 
 // category7: {
-//   'key':'medical',
-//   'text': 'Medical'
+//   'text':'medical',
+//   'value': 'Medical'
 // }, 
 // category8: {
-//   'key':'takeout',
-//   'text': 'Takeout'
+//   'text':'takeout',
+//   'value': 'Takeout'
 // }, 
 // category9: {
-//   'key':'dinningOut',
-//   'text': 'Dinning Out'
+//   'text':'dinningOut',
+//   'value': 'Dinning Out'
 // }, 
 // category10: {
-//   'key':'coffee',
-//   'text': 'Coffee'
+//   'text':'coffee',
+//   'value': 'Coffee'
 // }, 
 // category11: {
-//   'key':'drinks',
-//   'text': 'Drinks'
+//   'text':'drinks',
+//   'value': 'Drinks'
 // }, 
 // category12: {
-//   'key':'gas',
-//   'text': 'Gas'
+//   'text':'gas',
+//   'value': 'Gas'
 // }, 
 // category13: {
-//   'key':'taxi',
-//   'text': 'Taxi'
+//   'text':'taxi',
+//   'value': 'Taxi'
 // }, 
 // category14: {
-//   'key':'carService',
-//   'text': 'Car Service'
+//   'text':'carService',
+//   'value': 'Car Service'
 // }, 
 // category15: {
-//   'key':'carCleaning',
-//   'text': 'Car Cleaning'
+//   'text':'carCleaning',
+//   'value': 'Car Cleaning'
 // }, 
 // category16: {
-//   'key':'carInsurance',
-//   'text': 'Car Insurance'
+//   'text':'carInsurance',
+//   'value': 'Car Insurance'
 // }, 
 // category17: {
-//   'key':'movies',
-//   'text': 'Movies'
+//   'text':'movies',
+//   'value': 'Movies'
 // }, 
 // category18: {
-//   'key':'sports',
-//   'text': 'Sports'
+//   'text':'sports',
+//   'value': 'Sports'
 // }, 
 // category19: {
-//   'key':'events',
-//   'text': 'Events'
+//   'text':'events',
+//   'value': 'Events'
 // }, 
 // category20: {
-//   'key':'gifts',
-//   'text': 'Gifts'
+//   'text':'gifts',
+//   'value': 'Gifts'
 // }, 
 // category21: {
-//   'key':'charity',
-//   'text': 'Charity'
+//   'text':'charity',
+//   'value': 'Charity'
 // }, 
 // category22: {
-//   'key':'lodging',
-//   'text': 'Lodging'
+//   'text':'lodging',
+//   'value': 'Lodging'
 // }
 // };
   

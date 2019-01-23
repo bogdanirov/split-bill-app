@@ -3,19 +3,36 @@ import { Button, Dropdown, Form, Input } from 'semantic-ui-react';
 import expensesCategories from '../assets/expensesCategories';
 
 class AddNewExpense extends React.Component {
-    handleAddition = (e, { value }) => {
-        console.log(value);
-    }
-
-    createExpense = e => {
-        e.preventDefault();
+    constructor() {
+        super();
         const expense = {
             userId: '',
             amount: '',
             category: '',
-            timestamp: new Date()
+            timestamp: Math.floor(Date.now() / 1000)
         }
-        this.props.addExpense(expense);
+    }
+
+    handleAddition = (e, { value }) => {
+        console.log(value);
+    }
+
+    handleChange = (e, data) => {
+        const key = data.id,
+            value = data.value;
+            console.log(this.expense);
+
+        this.expense = {
+            key: value
+        }
+
+        console.log(this.expense);
+    }
+
+    createExpense = e => {
+        e.preventDefault();
+     
+        this.props.addExpense(this.expense);
         e.currentTarget.reset();
     }
 
@@ -30,19 +47,21 @@ class AddNewExpense extends React.Component {
                 value: 'Simona'
             }
         ];
+        console.log(splitBuddies);
+        console.log(expensesCategories);
 
         return (
             <Form onSubmit={this.createExpense}>
                 <Form.Field>
-                    <Dropdown placeholder='Select your split buddy' fluid selection search options={splitBuddies} onChange={e => console.log(e.target.value)} />
+                    <Dropdown id="userId" placeholder='Select your split buddy' fluid selection search options={splitBuddies} onChange={this.handleChange} />
                 </Form.Field>
                 <Form.Field>
                     <label>Amount</label>
-                    <Input icon="currency" iconPosition="left" type="number" step=".01" onChange={e => console.log(e.target.value)} />
+                    <Input id="amount" icon="currency" iconPosition="left" type="number" step=".01" onChange={this.handleChange} />
                 </Form.Field>
                 <Form.Field>
                     <label>Category</label>
-                    <Dropdown placeholder='Select expense category or add a new one' fluid selection options={expensesCategories} allowAdditions search onAddItem={this.handleAddition}  onChange={e => console.log(e.target.value)} />
+                    <Dropdown id="category" placeholder='Select expense category or add a new one' fluid selection search options={expensesCategories} allowAdditions onAddItem={this.handleAddition} onChange={this.handleChange} />
                 </Form.Field>
             
                 <Button type='submit'>Save Expense</Button>
