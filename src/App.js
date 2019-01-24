@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
+import './css/index.css';
+import 'semantic-ui-css/semantic.min.css';
 import Router from './components/Router';
 
 class App extends Component {
-  state = {
-    expenses: {}
-  }
-
-  addExpense = key => {
-    const expenses = {...this.state.expenses};
-    console.log(key);
-  }
 
   render() {
     return (
