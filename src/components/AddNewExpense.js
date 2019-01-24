@@ -3,14 +3,11 @@ import { Button, Dropdown, Form, Input } from 'semantic-ui-react';
 import expensesCategories from '../assets/expensesCategories';
 
 class AddNewExpense extends React.Component {
-    constructor() {
-        super();
-        const expense = {
-            userId: '',
-            amount: '',
-            category: '',
-            timestamp: Math.floor(Date.now() / 1000)
-        }
+    expense = {
+        userId: '',
+        amount: '',
+        category: '',
+        timestamp: Math.floor(Date.now() / 1000)
     }
 
     handleAddition = (e, { value }) => {
@@ -18,14 +15,10 @@ class AddNewExpense extends React.Component {
     }
 
     handleChange = (e, data) => {
-        const key = data.id,
-            value = data.value;
-            console.log(this.expense);
-
         this.expense = {
-            key: value
+            ...this.expense,
+            [data.id] : data.value
         }
-
         console.log(this.expense);
     }
 
@@ -47,8 +40,6 @@ class AddNewExpense extends React.Component {
                 value: 'Simona'
             }
         ];
-        console.log(splitBuddies);
-        console.log(expensesCategories);
 
         return (
             <Form onSubmit={this.createExpense}>
