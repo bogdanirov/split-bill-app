@@ -1,14 +1,29 @@
 import React from 'react';
 import { Button, Dropdown, Form, Input } from 'semantic-ui-react';
 import expensesCategories from '../assets/expensesCategories';
+import { localCurrency } from '../helpers';
 
 class AddNewExpense extends React.Component {
     expense = {
         userId: '',
         amount: '',
         category: '',
-        timestamp: Math.floor(Date.now() / 1000)
+        timestamp: ''
     }
+
+    splitBuddies = [
+        {
+            text: 'Bogdan',
+            value: 'Bogdan'
+        },
+        {
+            text: 'Simona',
+            value: 'Simona'
+        }
+    ];
+
+    userIdRef = React.createRef();
+    categoryRef = React.createRef();
 
     handleAddition = (e, { value }) => {
         console.log(value);
@@ -17,42 +32,33 @@ class AddNewExpense extends React.Component {
     handleChange = (e, data) => {
         this.expense = {
             ...this.expense,
-            [data.id] : data.value
+            [data.id] : data.value,
+            timestamp: Math.floor(Date.now() / 1000)
         }
-        console.log(this.expense);
     }
 
     createExpense = e => {
         e.preventDefault();
-     
         this.props.addExpense(this.expense);
+        //Reset form values //Used REFs for now until I know better how to manage controlling FORMS https://reactjs.org/docs/uncontrolled-components.html
         e.currentTarget.reset();
+        this.userIdRef.current.clearValue();
+        this.categoryRef.current.clearValue();
     }
 
     render() {
-        const splitBuddies = [
-            {
-                text: 'Bogdan',
-                value: 'Bogdan'
-            },
-            {
-                text: 'Simona',
-                value: 'Simona'
-            }
-        ];
-
         return (
             <Form onSubmit={this.createExpense}>
                 <Form.Field>
-                    <Dropdown id="userId" placeholder='Select your split buddy' fluid selection search options={splitBuddies} onChange={this.handleChange} />
+                    <Dropdown id="userId" ref={this.userIdRef} placeholder='Select your split buddy' fluid selection search options={this.splitBuddies} onChange={this.handleChange}  />
                 </Form.Field>
                 <Form.Field>
                     <label>Amount</label>
-                    <Input id="amount" icon="currency" iconPosition="left" type="number" step=".01" onChange={this.handleChange} />
+                    <Input id="amount" icon="currency" iconPosition="left" type="number" step=".01" onChange={this.handleChange} label={localCurrency} labelPosition='right' required />
                 </Form.Field>
                 <Form.Field>
                     <label>Category</label>
-                    <Dropdown id="category" placeholder='Select expense category or add a new one' fluid selection search options={expensesCategories} allowAdditions onAddItem={this.handleAddition} onChange={this.handleChange} />
+                    <Dropdown id="category" ref={this.categoryRef} placeholder='Select expense category or add a new one' fluid selection search options={expensesCategories} allowAdditions onAddItem={this.handleAddition} onChange={this.handleChange} />
                 </Form.Field>
             
                 <Button type='submit'>Save Expense</Button>

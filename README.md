@@ -1,5 +1,6 @@
 ## Split Bill App
-### An app for splitting money with your roommate *wink*. And also my try at building it in React
+### An open source app for splitting money with your roommate *wink*. And also my try at building it in React
+#### *Currently it is a work in progress*
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
