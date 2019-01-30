@@ -4,11 +4,15 @@ import expensesCategories from '../assets/expensesCategories';
 import { localCurrency } from '../helpers';
 
 class AddNewExpense extends React.Component {
-    expense = {
-        userId: '',
-        amount: '',
-        category: '',
-        timestamp: ''
+    state = {
+        expense : {
+            userId: '',
+            amount: '',
+            category: '',
+            timestamp: ''
+        },
+        fields: {},
+        errors: {}
     }
 
     splitBuddies = [
@@ -22,11 +26,8 @@ class AddNewExpense extends React.Component {
         }
     ];
 
-    userIdRef = React.createRef();
-    categoryRef = React.createRef();
-    isValid = true;
-
     handleAddition = (e, { value }) => {
+        //TODO: Handle adition for Dropdowns (Buddies and Categories)
         console.log(value);
     }
 
@@ -40,11 +41,6 @@ class AddNewExpense extends React.Component {
 
     createExpense = e => {
         e.preventDefault();
-        if(this.userIdRef.current.value === undefined || this.categoryRef.current.value === undefined) {
-            this.isValid = false;
-            console.log(this.isValid);
-            return;
-        }
         this.props.addExpense(this.expense);
         //Reset form values //Used REFs for now until I know better how to manage controlling FORMS https://reactjs.org/docs/uncontrolled-components.html
         e.currentTarget.reset();
@@ -56,15 +52,15 @@ class AddNewExpense extends React.Component {
         return (
             <Form onSubmit={this.createExpense}>
                 <Form.Field>
-                    <Dropdown id="userId" ref={this.userIdRef} placeholder='Select your split buddy' fluid selection search options={this.splitBuddies} onChange={this.handleChange} error={!this.isValid} />
+                    <Dropdown name="userId" placeholder='Select your split buddy' fluid selection search options={this.splitBuddies} onChange={this.handleChange} error={false} />
                 </Form.Field>
                 <Form.Field>
                     <label>Amount</label>
-                    <Input id="amount" icon="currency" iconPosition="left" type="number" step=".01" onChange={this.handleChange} label={localCurrency} labelPosition='right' required />
+                    <Input name="amount" icon="currency" iconPosition="left" type="number" step=".01" onChange={this.handleChange} label={localCurrency} labelPosition='right' required />
                 </Form.Field>
                 <Form.Field>
                     <label>Category</label>
-                    <Dropdown id="category" ref={this.categoryRef} placeholder='Select expense category or add a new one' fluid selection search options={expensesCategories} allowAdditions onAddItem={this.handleAddition} onChange={this.handleChange} error={!this.isValid} />
+                    <Dropdown name="category" placeholder='Select expense category or add a new one' fluid selection search options={expensesCategories} allowAdditions onAddItem={this.handleAddition} onChange={this.handleChange} error={false} />
                 </Form.Field>
             
                 <Button type='submit'>Save Expense</Button>
