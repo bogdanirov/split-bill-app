@@ -4,15 +4,11 @@ import expensesCategories from '../assets/expensesCategories';
 import { localCurrency } from '../helpers';
 
 class AddNewExpense extends React.Component {
-    state = {
-        expense : {
-            userId: '',
-            amount: '',
-            category: '',
-            timestamp: ''
-        },
-        fields: {},
-        errors: {}
+    expense = {
+        userId: '',
+        amount: '',
+        category: '',
+        timestamp: ''
     }
 
     splitBuddies = [
@@ -26,8 +22,10 @@ class AddNewExpense extends React.Component {
         }
     ];
 
+    userIdRef = React.createRef();
+    categoryRef = React.createRef();
+
     handleAddition = (e, { value }) => {
-        //TODO: Handle adition for Dropdowns (Buddies and Categories)
         console.log(value);
     }
 
@@ -52,15 +50,15 @@ class AddNewExpense extends React.Component {
         return (
             <Form onSubmit={this.createExpense}>
                 <Form.Field>
-                    <Dropdown name="userId" placeholder='Select your split buddy' fluid selection search options={this.splitBuddies} onChange={this.handleChange} error={false} />
+                    <Dropdown id="userId" ref={this.userIdRef} placeholder='Select your split buddy' fluid selection search options={this.splitBuddies} onChange={this.handleChange}  />
                 </Form.Field>
                 <Form.Field>
                     <label>Amount</label>
-                    <Input name="amount" icon="currency" iconPosition="left" type="number" step=".01" onChange={this.handleChange} label={localCurrency} labelPosition='right' required />
+                    <Input id="amount" icon="currency" iconPosition="left" type="number" step=".01" onChange={this.handleChange} label={localCurrency} labelPosition='right' required />
                 </Form.Field>
                 <Form.Field>
                     <label>Category</label>
-                    <Dropdown name="category" placeholder='Select expense category or add a new one' fluid selection search options={expensesCategories} allowAdditions onAddItem={this.handleAddition} onChange={this.handleChange} error={false} />
+                    <Dropdown id="category" ref={this.categoryRef} placeholder='Select expense category or add a new one' fluid selection search options={expensesCategories} allowAdditions onAddItem={this.handleAddition} onChange={this.handleChange} />
                 </Form.Field>
             
                 <Button type='submit'>Save Expense</Button>
