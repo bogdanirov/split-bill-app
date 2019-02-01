@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Dropdown, Form, Input } from 'semantic-ui-react';
 import expensesCategories from '../assets/expensesCategories';
+import splitBuddies from '../assets/buddies';
 import { localCurrency } from '../helpers';
 
 class AddNewExpense extends React.Component {
@@ -10,17 +11,6 @@ class AddNewExpense extends React.Component {
         category: '',
         timestamp: ''
     }
-
-    splitBuddies = [
-        {
-            text: 'Bogdan',
-            value: 'Bogdan'
-        },
-        {
-            text: 'Simona',
-            value: 'Simona'
-        }
-    ];
 
     userIdRef = React.createRef();
     categoryRef = React.createRef();
@@ -50,7 +40,7 @@ class AddNewExpense extends React.Component {
         return (
             <Form onSubmit={this.createExpense}>
                 <Form.Field>
-                    <Dropdown id="userId" ref={this.userIdRef} placeholder='Select your split buddy' fluid selection search options={this.splitBuddies} onChange={this.handleChange}  />
+                    <Dropdown id="userId" ref={this.userIdRef} placeholder='Select your split buddy' fluid selection search options={splitBuddies} onChange={this.handleChange}  />
                 </Form.Field>
                 <Form.Field>
                     <label>Amount</label>
