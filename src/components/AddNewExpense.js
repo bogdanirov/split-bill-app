@@ -6,7 +6,7 @@ import { localCurrency } from '../helpers';
 class AddNewExpense extends React.Component {
     expense = {
         userId: '',
-        amount: '',
+        amount: 0,
         category: '',
         timestamp: ''
     }

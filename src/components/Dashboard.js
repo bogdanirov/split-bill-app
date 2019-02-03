@@ -12,9 +12,20 @@ class Dashboard extends React.Component {
         users: {
             splitBuddies,
             loggedIn :{
-                text: 'Catalina',
-                value: 'Catalina'
+                text: 'Bogdan',
+                value: 'Bogdan',
+                balance: 0
             }
+        }
+       
+    }
+    
+    groups = {
+        group1: {
+            id: 1,
+            user1: 'Bogdan',
+            user2: 'Catalina',
+            balance: 0
         }
     }
 
@@ -35,6 +46,7 @@ class Dashboard extends React.Component {
         }, 0);
         totals[`total${Math.floor(Date.now() / 1000)}`] = {
             amount: total,
+            groupId: this.groups.group1.id,
             timestamp: Math.floor(Date.now() / 1000)
         }
         this.setState({totals});
