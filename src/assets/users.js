@@ -4,8 +4,8 @@ const splitBuddies = [
         value: 'Bogdan'
     },
     {
-        text: 'Simona',
-        value: 'Simona'
+        text: 'Catalina',
+        value: 'Catalina'
     }
 ];
 

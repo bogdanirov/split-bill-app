@@ -1,16 +1,24 @@
 import React from 'react';
+import { Table } from 'semantic-ui-react';
 import { formatDate, formatPrice } from '../helpers';
 
 class Expense extends React.Component {
     render() {
         return(
-            <li className="expenseItem">
-                <div className="ui grid">
+            <Table.Row>
+                <Table.Cell collapsing>
                     <strong>{this.props.id.category}</strong>
-                    <p>{formatPrice(this.props.id.amount)} payable by {this.props.id.userId}. Added on {formatDate(this.props.id.timestamp)}</p>
-                </div>
-            </li>
-                
+                </Table.Cell>
+                <Table.Cell collapsing>
+                    {formatPrice(this.props.id.amount)}
+                </Table.Cell>
+                <Table.Cell>
+                {this.props.id.userId}
+                </Table.Cell>
+                <Table.Cell collapsing textAlign='right'>
+                {formatDate(this.props.id.timestamp)}
+                </Table.Cell>
+            </Table.Row>
         )
     }
 }

@@ -1,18 +1,43 @@
 import React from 'react';
 import AddNewExpense from './AddNewExpense';
 import Expense from './Expense';
+import Total from './Total';
+import { Table } from 'semantic-ui-react';
+import splitBuddies from '../assets/users';
 
 class Dashboard extends React.Component {
     state = {
         expenses: {},
         totals: {},
-        users: {}
+        users: {
+            splitBuddies,
+            loggedIn :{
+                text: 'Catalina',
+                value: 'Catalina'
+            }
+        }
     }
-    
+
     addExpense = key => {
         const expenses = {...this.state.expenses};
         expenses[`expense${key['timestamp']}`] = key;
-        this.setState({ expenses });
+        this.setState(
+            { expenses },
+            () => this.calculateTotal()
+        );
+    }
+
+    calculateTotal = () => {
+        const expenses = {...this.state.expenses};
+        const totals   = {...this.state.totals};
+        const total = Object.keys(expenses).reduce( (total, key) => {
+            return total + parseInt(expenses[key].amount);
+        }, 0);
+        totals[`total${Math.floor(Date.now() / 1000)}`] = {
+            amount: total,
+            timestamp: Math.floor(Date.now() / 1000)
+        }
+        this.setState({totals});
     }
 
     render() {
@@ -27,15 +52,28 @@ class Dashboard extends React.Component {
                 <div className="ui grid">
                     <div className="column eight wide">
                         <h3>Add New Expense</h3>
-                        <AddNewExpense addExpense={this.addExpense} />
+                        <AddNewExpense addExpense={this.addExpense} splitBuddies={this.state.users.splitBuddies} />
                     </div>
                     <div className="column eight wide">
                         <h3>Latest Expenses Added</h3>
-                        {
-                            Object.keys(this.state.expenses).map(key => {
-                                return <Expense id={this.state.expenses[key]} key={key}/>
-                            })
-                        }
+                        <Table celled striped>
+                            <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>Category</Table.HeaderCell>
+                                <Table.HeaderCell>Amount</Table.HeaderCell>
+                                <Table.HeaderCell>Added By</Table.HeaderCell>
+                                <Table.HeaderCell>Date</Table.HeaderCell>
+                            </Table.Row>
+                            </Table.Header>
+                            <Table.Body>
+                                {
+                                    Object.keys(this.state.expenses).map(key => {
+                                        return <Expense id={this.state.expenses[key]} key={key}/>
+                                    })
+                                }
+                            </Table.Body>
+                        </Table>
+                        <h4> Total: <Total totals={this.state.totals} /></h4>
                     </div>
                 </div>
             </div>
