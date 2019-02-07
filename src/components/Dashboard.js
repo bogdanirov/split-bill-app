@@ -8,7 +8,6 @@ import splitBuddies from '../assets/users';
 class Dashboard extends React.Component {
     state = {
         expenses: {},
-        totals: {},
         users: {
             splitBuddies,
             loggedIn :{
@@ -16,16 +15,14 @@ class Dashboard extends React.Component {
                 value: 'Bogdan',
                 balance: 0
             }
-        }
-       
-    }
-    
-    groups = {
-        group1: {
-            id: 1,
-            user1: 'Bogdan',
-            user2: 'Catalina',
-            balance: 0
+        },
+        groups: {
+            group1: {
+                id: 1,
+                user1: 'Bogdan',
+                user2: 'Catalina',
+                balance: 0
+            }
         }
     }
 
@@ -40,16 +37,19 @@ class Dashboard extends React.Component {
 
     calculateTotal = () => {
         const expenses = {...this.state.expenses};
-        const totals   = {...this.state.totals};
+        const groups = {...this.state.groups};
         const total = Object.keys(expenses).reduce( (total, key) => {
             return total + parseInt(expenses[key].amount);
         }, 0);
-        totals[`total${Math.floor(Date.now() / 1000)}`] = {
-            amount: total,
-            groupId: this.groups.group1.id,
-            timestamp: Math.floor(Date.now() / 1000)
+
+        Object.keys(groups).map( key => {
+            console.log(key);
+        });
+        groups.group1 = {
+            ...groups.group1,
+            balance: total
         }
-        this.setState({totals});
+        this.setState({groups});
     }
 
     render() {
@@ -85,7 +85,7 @@ class Dashboard extends React.Component {
                                 }
                             </Table.Body>
                         </Table>
-                        <h4> Total: <Total totals={this.state.totals} /></h4>
+                        <h4> Total: <Total groups={this.state.groups}/> </h4>
                     </div>
                 </div>
             </div>
