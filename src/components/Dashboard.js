@@ -40,17 +40,18 @@ class Dashboard extends React.Component {
         this.setState({authenticated});
     }
 
+    updateGroupBalance = (expense) => {
+        const groups = {...this.state.groups};
+        
+    }
+
     calculateTotal = () => {
         const expenses = {...this.state.expenses};
         const groups = {...this.state.groups};
         const total = Object.keys(expenses).reduce( (total, key) => {
-            // console.log(expenses[key]);
             return total + parseInt(expenses[key].amount);
         }, 0);
 
-        // Object.keys(groups).map( key => {
-        //     console.log(key);
-        // });
         groups.group1 = {
             ...groups.group1,
             balance: total
