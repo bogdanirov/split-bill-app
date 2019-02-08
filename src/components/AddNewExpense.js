@@ -5,9 +5,10 @@ import { localCurrency } from '../helpers';
 
 class AddNewExpense extends React.Component {
     expense = {
-        userId: '',
+        splitUserId: '',
         amount: 0,
         category: '',
+        groupId: '',
         timestamp: ''
     }
 
@@ -19,9 +20,19 @@ class AddNewExpense extends React.Component {
     }
 
     handleChange = (e, data) => {
+     
+        const authUser = this.props.authenticated,
+            groups = this.props.groups,
+            currentGroupId = Object.keys(groups).map(group => {
+                if(authUser.name === groups[group].user1) {
+                    return groups[group].id;
+                }
+            });
+        // console.log(currentGroupId);
         this.expense = {
             ...this.expense,
             [data.id] : data.value,
+            groupId: currentGroupId,
             timestamp: Math.floor(Date.now() / 1000)
         }
     }
@@ -39,7 +50,7 @@ class AddNewExpense extends React.Component {
         return (
             <Form onSubmit={this.createExpense}>
                 <Form.Field>
-                    <Dropdown id="userId" ref={this.userIdRef} placeholder='Paid by' fluid selection search options={this.props.splitBuddies} onChange={this.handleChange}  />
+                    <Dropdown id="splitUserId" ref={this.userIdRef} placeholder='Split with' fluid selection search options={this.props.users.splitBuddies} onChange={this.handleChange}  />
                 </Form.Field>
                 <Form.Field>
                     <label>Amount</label>

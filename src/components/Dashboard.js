@@ -4,26 +4,20 @@ import Expense from './Expense';
 import Total from './Total';
 import { Table } from 'semantic-ui-react';
 import splitBuddies from '../assets/users';
+import groups from '../assets/groups';
 
 class Dashboard extends React.Component {
     state = {
         expenses: {},
         users: {
-            splitBuddies,
-            loggedIn :{
-                text: 'Bogdan',
-                value: 'Bogdan',
-                balance: 0
-            }
+            splitBuddies
         },
-        groups: {
-            group1: {
-                id: 1,
-                user1: 'Bogdan',
-                user2: 'Catalina',
-                balance: 0
-            }
-        }
+        authenticated: {
+            id: 1,
+            name: 'Bogdan',
+            balance: 0
+        },
+        groups
     }
 
     addExpense = key => {
@@ -31,20 +25,32 @@ class Dashboard extends React.Component {
         expenses[`expense${key['timestamp']}`] = key;
         this.setState(
             { expenses },
+            () => this.updateUserBalance(key),
             () => this.calculateTotal()
         );
+    }
+
+    updateUserBalance = (expense) => {
+        let authenticated  = {...this.state.authenticated};
+        const balance =  parseInt(authenticated.balance) + parseInt(expense.amount);
+        authenticated = {
+            ...authenticated,
+            balance: balance
+        }
+        this.setState({authenticated});
     }
 
     calculateTotal = () => {
         const expenses = {...this.state.expenses};
         const groups = {...this.state.groups};
         const total = Object.keys(expenses).reduce( (total, key) => {
+            // console.log(expenses[key]);
             return total + parseInt(expenses[key].amount);
         }, 0);
 
-        Object.keys(groups).map( key => {
-            console.log(key);
-        });
+        // Object.keys(groups).map( key => {
+        //     console.log(key);
+        // });
         groups.group1 = {
             ...groups.group1,
             balance: total
@@ -64,7 +70,7 @@ class Dashboard extends React.Component {
                 <div className="ui grid">
                     <div className="column eight wide">
                         <h3>Add New Expense</h3>
-                        <AddNewExpense addExpense={this.addExpense} splitBuddies={this.state.users.splitBuddies} />
+                        <AddNewExpense addExpense={this.addExpense} authenticated={this.state.authenticated} users={this.state.users} groups={this.state.groups} />
                     </div>
                     <div className="column eight wide">
                         <h3>Latest Expenses Added</h3>
